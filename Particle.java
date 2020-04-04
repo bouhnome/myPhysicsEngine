@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 public class Particle{
 
   private double inverseMass; 
@@ -9,6 +11,7 @@ public class Particle{
   public Apoint acceleration;
   public Apoint forceAccum;
   public double damping; // parameter that allows us to simulate simple drag forces 
+  public int rayon=2;//rayon de la particule
 
 
 
@@ -55,6 +58,17 @@ public class Particle{
   public double getMass(){
      double b = 1/this.inverseMass;
     return b;
+  }
+
+  /**
+   * Pour dessiner la figure courante
+   * @param l'objet graphique où dessiner
+   */ 
+  public void dessine(Graphics g){
+        // Appel à la méthode de l'ancêtre
+        g.setColor(Color.BLACK);
+        // Pour dessiner une particule(on déssine un cercle de petit rayon)
+        g.fillOval((int)(position.x)-rayon,(int)(position.y)-rayon,2*rayon,2*rayon);
   }
 
   //integration method that integrates velocity and position uing Euler-explicit
