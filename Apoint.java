@@ -1,9 +1,9 @@
 
 public class Apoint {//Class for 3D points/vectors
     
-    public double x;
-    public double y;
-    public double z;
+    private double x;
+    private double y;
+    private double z;
     //coordinates
     
     public Apoint(){ //default constructor creates 0 vector 
@@ -21,6 +21,30 @@ public class Apoint {//Class for 3D points/vectors
         this.y = y;
         this.z = z;
     }
+
+    //getters and setters
+    public double getX(){
+        return this.x;
+    }
+    public double getY(){
+        return this.y;
+    }
+    public double getZ(){
+        return this.z;
+    }
+    public void setX(double x){
+        this.x=x;
+    }
+    public void setY(double x){
+        this.y=y;
+    }
+    public void setZ(double x){
+        this.z=z;
+    }
+
+
+
+
     
     public static double magnitude(Apoint a){//returns the magnitude of the argument vector
         return Math.sqrt(a.x*a.x+a.y*a.y+a.z*a.z);

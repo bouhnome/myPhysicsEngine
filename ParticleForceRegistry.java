@@ -1,11 +1,17 @@
 import java.util.*;
 class ParticleForceRegistration{
-  public Particle a;
-  public ParticleForceGenerator fg;
+  private Particle a;
+  private ParticleForceGenerator fg;
   public ParticleForceRegistration(Particle a , ParticleForceGenerator fg){//the ParticleForRegistration merely points to the corresponding objects
     this.a = a;
     this.fg = fg;
     
+  }
+  public ParticleForceGenerator getFg(){
+    return this.fg;
+  }
+  public Particle get_a(){
+    return this.a;
   }
 }
 
@@ -29,7 +35,7 @@ public void clear(){//empties the registrations of  all connections
 
 public void updateForces(double dt){// calls all the forceGenerators to update the forces of their corresponding particles
   for(ParticleForceRegistration b : registrations ){
-  b.fg.updateForce(b.a,dt);
+  b.getFg().updateForce(b.get_a(),dt);
   }
 }
 
