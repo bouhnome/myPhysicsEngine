@@ -6,12 +6,15 @@ public class ParticleContact{
 	double restitution;
 	//the contact normal vector from the point of view of the first particle in the array
 	Apoint contactNormal;
+    //Holds the depth of penetration at the contact 
+    double penetration;
 
 	//constructor
 	public ParticleContact(Particle particles[],double restitution, Apoint contactNormal){
 		this.particles = particles;
 		this.restitution = restitution;
-		this.contactNormal = contactNormal;
+		this.contactNormal = new Apoint(contactNormal);
+		this.penetration = penetration;
 	}
 
 	/*
@@ -19,6 +22,7 @@ public class ParticleContact{
 	*/
 	public void resolve(double dt){
 		resolveVelocity(dt);
+		resolveInterpenetration(dt);
 	}
 
 
@@ -73,5 +77,30 @@ public class ParticleContact{
 			//Particle 1 goes in the opposite direction.
 			particles[1].setVel(Apoint.add(particles[1].getVel(),Apoint.multByScalar(impulsePerIMass,-particles[1].getInverseMass())));
 		}
+	}
+
+	/*
+	 *Handles the interpenetration resolution for this contact
+	 */
+	void resolveInterpenetration(double dt){
+		//if we don't have interpenetration, skip this step
+		if(penetration<=0) return;
+
+		//the movement of each object is based on its inverse mass, so total that
+		double totalInverseMass = particles[0].getInverseMass();
+		if(particles[1]!=null) totalInverseMass+=particles[1].getInverseMass();
+
+		//if all particles have infinite mass, then do nothing
+		if(totalInverseMass<=0) return;
+
+		//find the amount of penetration resolution per unit of mass
+		Apoint movePerIMass = Apoint.multByScalar(contactNormal,(-penetration/totalInverseMass));
+
+		//apply the penetration resolution
+		particles[0].setPos(Apoint.add(particles[0].getPos(),Apoint.multByScalar(movePerIMass,particles[0].getInverseMass())));
+		if(particles[1]!=null){
+			particles[1].setPos(Apoint.add(particles[1].getPos(),Apoint.multByScalar(movePerIMass,particles[1].getInverseMass())));
+		}
+
 	}
 }
