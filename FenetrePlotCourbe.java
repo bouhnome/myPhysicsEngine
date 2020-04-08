@@ -16,7 +16,7 @@
      private int temps;
      private static int DELTA_T = 40;
      public double dt = ((double)DELTA_T)/100;
-     public static double limite_sol=0.80;
+     public static double limite_sol=0.90;
      public Simulation simulator;
 
  	/**

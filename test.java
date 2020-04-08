@@ -13,16 +13,13 @@ public class test{
 		ParticleGravity poids = new ParticleGravity(new Apoint(0,9.8,0));
  		
 		//the particle linked list if filled with some particles
-		listOfParticles.add(new Particle(new Apoint(100,100,0),0.01,new Apoint(0,9,0),0.9,8,1));
- 		listOfParticles.add(new Particle(new Apoint(130,130,0),0.01,new Apoint(0,9,0),0.9,8,1));
- 		listOfParticles.add(new Particle(new Apoint(160,160,0),0.01,new Apoint(0,9,0),0.9,8,1));
- 		listOfParticles.add(new Particle(new Apoint(190,190,0),0.01,new Apoint(0,9,0),0.9,8,1));
-
-		//on attach some forces
+		listOfParticles.add(new Particle(new Apoint(100,100,0)/*initial position*/,0.01/*inverse mass*/,new Apoint(30,0,0)/*initial Velocity*/,1/*damping*/,10/*radius*/,1/*rebound*/));
+ 		listOfParticles.add(new Particle(new Apoint(500,100,0),0.01,new Apoint(-30,0,0),1,20,1));
+ 		/*
+		//we attach some forces
  		for(Particle b : listOfParticles)
  			registry.add(b,poids);
- 		
-
+ 		*/
 
  		FenetrePlotCourbe fenetre = new FenetrePlotCourbe(listOfParticles,simulator);
  		//we launch the window and the timer

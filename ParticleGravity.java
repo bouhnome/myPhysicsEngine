@@ -11,7 +11,7 @@ public void updateForce(Particle a, double dt){//implementation of the updateFor
   if(!a.hasFiniteMass())
     return;
   //we add the force to the particle's accumulator
-  a.addForce( Apoint.multByScalar(g,a.getMass() ));
+  a.addForce( Apoint.multByScalar(g,1/a.getInverseMass() ));
 }
 
 }
