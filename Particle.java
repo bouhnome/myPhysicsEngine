@@ -58,8 +58,8 @@ public class Particle{
   public Apoint getFoAcu(){
     return this.forceAccum;
   }
-  public double getMass(){
-    double b = 1/this.inverseMass;
+  public double getInverseMass(){
+    double b = this.inverseMass;
     return b;
   }
   public double getDamp(){
@@ -144,19 +144,19 @@ public class Particle{
         position = new Apoint(position.getX(),800*FenetrePlotCourbe.limite_sol-rayon,position.getZ());
         velocity=new Apoint(velocity.getX(),-rebound*velocity.getY(),velocity.getZ()); 
     }
-    if(position.getY()<getRayon()+22){//the value 22 is a constant and corresponds to the thickness of the band at the top of the window
-        position = new Apoint(position.getX(),position.getY(),position.getZ());
-        velocity=new Apoint(getRayon()+22,-rebound*velocity.getY(),velocity.getZ());
+    if(position.getY()<rayon+22){//the value 22 is a constant and corresponds to the thickness of the band at the top of the window
+        position = new Apoint(position.getX(),rayon+22,position.getZ());
+        velocity=new Apoint(velocity.getX(),-rebound*velocity.getY(),velocity.getZ());
         
         
     }
-    if(position.getX()<getRayon()){
-        position = new Apoint(0,position.getY(),position.getZ());
+    if(position.getX()<rayon){
+        position = new Apoint(rayon,position.getY(),position.getZ());
         velocity=new Apoint(-rebound*velocity.getX(),velocity.getY(),velocity.getZ());
         
     }
-    if(position.getX()>1400-getRayon()){
-        position = new Apoint(1400-getRayon(),position.getY(),position.getZ());
+    if(position.getX()>1400-rayon){
+        position = new Apoint(1400-rayon,position.getY(),position.getZ());
         velocity=new Apoint(-rebound*velocity.getX(),velocity.getY(),velocity.getZ());
         
     }

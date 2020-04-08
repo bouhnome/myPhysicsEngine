@@ -28,12 +28,9 @@ public void add(Particle a, ParticleForceGenerator fg){//adds the pair to the li
 }
 
 public void remove(Particle a , ParticleForceGenerator fg){//removes the pair from the linked list and does nothing if the pair is not present
-  registrations.remove(new ParticleForceRegistration(a,fg));
 }
 
-
 public void clear(){//empties the registrations of  all connections
-  registrations.clear();
 }
 
 public void updateForces(double dt){// calls all the forceGenerators to update the forces of their corresponding particles
