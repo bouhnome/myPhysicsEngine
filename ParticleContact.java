@@ -52,6 +52,19 @@ public class ParticleContact{
 		//calculate the new separating velocity 
 		double newSepVelocity = -separatingVelocity*restitution;
 
+		// Check the velocity build-up due to acceleration only.
+		Apoint accCausedVelocity = particles[0].getAcc();
+		if (particles[1]!=null) accCausedVelocity=Apoint.substract(accCausedVelocity,particles[1].getAcc());
+		double accCausedSepVelocity = Apoint.dotProduct(accCausedVelocity,contactNormal)*dt;
+		// If we’ve got a closing velocity due to acceleration build-up, // remove it from the new separating velocity.
+		if (accCausedSepVelocity < 0)
+		{
+    		newSepVelocity += restitution * accCausedSepVelocity;
+    		// Make sure we haven’t removed more than was
+    		// there to remove.
+    		if (newSepVelocity < 0) newSepVelocity = 0;
+		}
+
 		double deltaVelocity = newSepVelocity - separatingVelocity;
 
 		//we apply the change  in velocity to each object in proportion to 
